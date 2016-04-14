@@ -1,13 +1,14 @@
 FROM ruby:2.2
-MAINTAINER marko@codeship.com
+MAINTAINER umakanth5337
+
+LABEL Description="This image is uesd to start article api" Version="1.0"
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
 # Debian image, we use apt-get to install those.
 RUN apt-get update && apt-get install -y \
   build-essential \
-  nodejs \
-  git
+  nodejs
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
@@ -23,8 +24,6 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Copy the main application.
-RUN git clone https://github.com/sriram15690/pingpongapp.git
-RUN cd pingpongapp
 COPY . ./
 
 # Expose port 3000 to the Docker host, so we can access it
