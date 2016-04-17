@@ -2,19 +2,19 @@
 
   <% if @article.errors.any? %>
     <div id="error_explanation">
-      <h2>
+      <h2 class="bg-danger alert alert-danger">
         <%= pluralize(@article.errors.count, "error") %>
         prohibited this article from being saved:
       </h2>
       <ul>
         <% @article.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <li class="bg-danger alert alert-danger"><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-<%= form_for :article, url:articles_path do |f| %>
+<%= form_for :article, url:articles_path, :html => {:class => "form-horizontal"} do |f| %>
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -24,8 +24,8 @@
     <%= f.text_field :text %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-default btn-primary" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', articles_path %>
+<%= link_to 'Back', articles_path, class: "btn btn-default" %>
